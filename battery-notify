@@ -7,10 +7,8 @@ lower_limit=20
 upper_limit=96
 
 if [ "$battery" -lt "$lower_limit" ]; then
-    if [ "$state" == "pending-charge" ]; then
+    if [ "$state" != "charging" ]; then
         DISPLAY=:0 /usr/bin/notify-send --urgency=critical "Battery below 20%"
-    elif [ "$state" == "discharging" ]; then
-        DISPLAY=:0 /usr/bin/notify-send --urgency=critical "Oh no ! Charger plugged in but not turned on"
     fi
 elif [ "$battery" -gt "$upper_limit" ]; then
     if [ "$state" == "charging" ]; then
